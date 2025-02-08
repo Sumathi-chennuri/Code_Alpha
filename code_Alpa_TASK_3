@@ -1,0 +1,117 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPyTDQDcJS6YW9vqNsi62jQ",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Sumathi-chennuri/Code_Alpha/blob/main/code_Alpa_TASK_3\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "import os\n",
+        "import shutil\n",
+        "\n",
+        "def organize_files(folder_path):\n",
+        "    \"\"\"\n",
+        "    Organizes files in the specified folder by their types.\n",
+        "    \"\"\"\n",
+        "    # Define categories and their corresponding file extensions\n",
+        "    categories = {\n",
+        "        \"Images\": [\".jpg\", \".jpeg\", \".png\", \".gif\", \".bmp\"],\n",
+        "        \"Documents\": [\".pdf\", \".doc\", \".docx\", \".txt\", \".ppt\", \".pptx\", \".xls\", \".xlsx\"],\n",
+        "        \"Videos\": [\".mp4\", \".mkv\", \".avi\", \".mov\"],\n",
+        "        \"Audio\": [\".mp3\", \".wav\", \".aac\"],\n",
+        "        \"Archives\": [\".zip\", \".rar\", \".7z\", \".tar\", \".gz\"],\n",
+        "        \"Others\": []  # For files that don't match the above categories\n",
+        "    }\n",
+        "\n",
+        "    # Ensure the folder exists\n",
+        "    if not os.path.exists(folder_path):\n",
+        "        print(f\"Error: The folder '{folder_path}' does not exist.\")\n",
+        "        return\n",
+        "\n",
+        "    # Create directories for each category\n",
+        "    for category in categories:\n",
+        "        category_path = os.path.join(folder_path, category)\n",
+        "        if not os.path.exists(category_path):\n",
+        "            os.mkdir(category_path)\n",
+        "\n",
+        "    # Move files to their respective category folders\n",
+        "    for file_name in os.listdir(folder_path):\n",
+        "        file_path = os.path.join(folder_path, file_name)\n",
+        "\n",
+        "        # Skip directories\n",
+        "        if os.path.isdir(file_path):\n",
+        "            continue\n",
+        "\n",
+        "        # Check the file extension and move to the appropriate folder\n",
+        "        _, file_extension = os.path.splitext(file_name)\n",
+        "        moved = False\n",
+        "        for category, extensions in categories.items():\n",
+        "            if file_extension.lower() in extensions:\n",
+        "                shutil.move(file_path, os.path.join(folder_path, category, file_name))\n",
+        "                moved = True\n",
+        "                break\n",
+        "\n",
+        "        # If no matching category, move to \"Others\"\n",
+        "        if not moved:\n",
+        "            shutil.move(file_path, os.path.join(folder_path, \"Others\", file_name))\n",
+        "\n",
+        "    print(\"Files organized successfully!\")\n",
+        "\n",
+        "# Replace this with the path of the folder you want to organize\n",
+        "folder_to_organize = input(\"Enter the folder path to organize: \").strip()\n",
+        "organize_files(folder_to_organize)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "7BTS1ibMr0al",
+        "outputId": "713d9306-213d-4d40-ad63-77f4afb46012"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Enter the folder path to organize: Videos\n",
+            "Error: The folder 'Videos' does not exist.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "z_xRdLlasNnn"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
