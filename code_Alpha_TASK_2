@@ -1,0 +1,132 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOGV1iIQNndyOD602DA3psU",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Sumathi-chennuri/Code_Alpha/blob/main/code_Alpha_TASK_2\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "79044DC7rOLa",
+        "outputId": "5475f0e5-a01b-4e85-bc4f-6b2c99332df6"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "[nltk_data] Downloading package wordnet to /root/nltk_data...\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Hello! I am a basic chatbot. Type 'bye' to end the conversation.\n",
+            "You: a\n",
+            "Chatbot: I'm not sure how to respond to that.\n",
+            "You: name\n",
+            "Chatbot: I'm not sure how to respond to that.\n",
+            "You: time?\n",
+            "Chatbot: I'm not sure how to respond to that.\n",
+            "You: what is time?\n",
+            "Chatbot: I'm not sure how to respond to that.\n"
+          ]
+        }
+      ],
+      "source": [
+        "import nltk\n",
+        "import random\n",
+        "from nltk.corpus import wordnet\n",
+        "from nltk.chat.util import Chat, reflections\n",
+        "\n",
+        "nltk.download('wordnet')\n",
+        "\n",
+        "pairs = [\n",
+        "    [r\"hi|hello|hey\", [\"Hi there!\", \"Hey! How can I help you?\"]],\n",
+        "    [r\"i am good\", [\"Glad to hear that! How's your day going so far?\"]],\n",
+        "    [r\"Who created you?\", [\"I was created by Wahid jamadar for a code alpha internship task\"]],\n",
+        "    [r\"Who is wahid?\", [\" I  was created by wahid ,Inshort wahid brought me to life with code and a lot of creativity!\"]],\n",
+        "    [r\"how are you?\", [\"I'm a chatbot, but I'm here to help!\", \"I'm great, thanks for asking!\"]],\n",
+        "    [r\"what is your name?\", [\"I'm ChatBot, your friendly assistant.\"]],\n",
+        "    [r\"bye|goodbye\", [\"Goodbye!\", \"See you soon!\", \"It was nice talking to you!\"]],\n",
+        "    [r\"(.*) help (.*)\", [\"I'm here to help! What do you need assistance with?\", \"Sure, I can help with that.\"]],\n",
+        "     [r\"help\", [\"I'm here to help! What do you need assistance with?\", \"Sure, I can help with that.\"]],\n",
+        "    [r\"(.*) your favorite (.*)\", [\"I don't have personal preferences, but I can help you with yours!\"]],\n",
+        "]\n",
+        "\n",
+        "reflections = {\n",
+        "    \"i am\"       : \"you are\",\n",
+        "    \"i was\"      : \"you were\",\n",
+        "    \"i\"          : \"you\",\n",
+        "    \"i'd\"        : \"you would\",\n",
+        "    \"i've\"       : \"you have\",\n",
+        "    \"i'll\"       : \"you will\",\n",
+        "    \"my\"         : \"your\",\n",
+        "    \"you are\"    : \"I am\",\n",
+        "    \"you were\"   : \"I was\",\n",
+        "    \"you've\"     : \"I have\",\n",
+        "    \"you'll\"     : \"I will\",\n",
+        "    \"your\"       : \"my\",\n",
+        "    \"yours\"      : \"mine\",\n",
+        "    \"you\"        : \"me\",\n",
+        "    \"me\"         : \"you\"\n",
+        "}\n",
+        "\n",
+        "chatbot = Chat(pairs, reflections)\n",
+        "\n",
+        "def chat():\n",
+        "    print(\"Hello! I am a basic chatbot. Type 'bye' to end the conversation.\")\n",
+        "    while True:\n",
+        "        user_input = input(\"You: \")\n",
+        "        if user_input.lower() == \"bye\":\n",
+        "            print(\"Chatbot: Goodbye! Have a nice day.\")\n",
+        "            break\n",
+        "        else:\n",
+        "            response = chatbot.respond(user_input)\n",
+        "            if response:\n",
+        "                print(f\"Chatbot: {response}\")\n",
+        "            else:\n",
+        "                print(\"Chatbot: I'm not sure how to respond to that.\")\n",
+        "\n",
+        "if __name__ == \"__main__\":\n",
+        "    chat()"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "VM_3oDKKrSvJ"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
